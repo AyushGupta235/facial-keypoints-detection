@@ -79,17 +79,17 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=config.LEARNING_RATE, weight_decay=config.WEIGHT_DECAY)
     scaler = torch.cuda.amp.GradScaler()
 
-    #model_4 = EfficientNet.from_pretrained("efficientnet-b0")
-    #model_4._fc = nn.Linear(1280, 30)
-    #model_15 = EfficientNet.from_pretrained("efficientnet-b0")
-    #model_15._fc = nn.Linear(1280, 30)
-    #model_4.to(config.DEVICE)
-    #model_15.to(config.DEVICE)
+    model_4 = EfficientNet.from_pretrained("efficientnet-b0")
+    model_4._fc = nn.Linear(1280, 30)
+    model_15 = EfficientNet.from_pretrained("efficientnet-b0")
+    model_15._fc = nn.Linear(1280, 30)
+    model_4.to(config.DEVICE)
+    model_15.to(config.DEVICE)
 
     if config.LOAD_MODEL and config.CHECKPOINT_FILE in os.listdir():
         load_checkpoint(torch.load(config.CHECKPOINT_FILE), model, optimizer, config.LEARNING_RATE)
-        #load_checkpoint(torch.load("b0_4.pth.tar"), model_4, optimizer, config.LEARNING_RATE)
-        #load_checkpoint(torch.load("b0_15.pth.tar"), model_15, optimizer, config.LEARNING_RATE)
+        load_checkpoint(torch.load("b0_4.pth.tar"), model_4, optimizer, config.LEARNING_RATE)
+        load_checkpoint(torch.load("b0_15.pth.tar"), model_15, optimizer, config.LEARNING_RATE)
 
     #get_submission(test_loader, test_ds, model_4=model_4, model_15=model_15)
 
